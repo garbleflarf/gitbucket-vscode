@@ -1,0 +1,306 @@
+{
+  "name": "gitbucket",
+  "displayName": "GitBucket",
+  "description": "Connect to GitBucket and manage repositories, branches, and credentials from VS Code",
+  "version": "0.1.0",
+  "publisher": "LuigiNET",
+  "author": {
+    "name": "garbleflarf",
+    "email": "garbleflarf@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/opietaylor911/gitbucket-repos.git"
+  },
+  "icon": "gitbucket.png",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "SCM Providers"
+  ],
+  "keywords": [
+    "gitbucket",
+    "git",
+    "repositories",
+    "branches",
+    "scm"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "gitbucketRepos",
+          "title": "GitBucket",
+          "icon": "icns/repositories.svg"
+        }
+      ]
+    },
+    "views": {
+      "gitbucketRepos": [
+        {
+          "id": "gitbucketRepos.repositories",
+          "name": "Repositories",
+          "icon": "icns/repositories.svg",
+          "contextualTitle": "GitBucket"
+        },
+        {
+          "id": "gitbucketRepos.issues",
+          "name": "Issues",
+          "icon": "icns/issues.svg",
+          "contextualTitle": "GitBucket"
+        },
+        {
+          "id": "gitbucketRepos.pullRequests",
+          "name": "Pull Requests",
+          "icon": "icns/pull-requests.svg",
+          "contextualTitle": "GitBucket"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "gitbucket-repos.connect",
+        "title": "GitBucket: Connect",
+        "icon": "$(plug)"
+      },
+      {
+        "command": "gitbucket-repos.createRepository",
+        "title": "GitBucket: Create Repository",
+        "icon": "$(repo-create)"
+      },
+      {
+        "command": "gitbucket-repos.createBranch",
+        "title": "GitBucket: Create Branch",
+        "icon": "$(git-branch)"
+      },
+      {
+        "command": "gitbucket-repos.showIssuesForRepository",
+        "title": "GitBucket: Browse Repository Issues",
+        "icon": "$(issues)"
+      },
+      {
+        "command": "gitbucket-repos.showPullRequestsForRepository",
+        "title": "GitBucket: Browse Repository Pull Requests",
+        "icon": "$(git-pull-request)"
+      },
+      {
+        "command": "gitbucket-repos.refreshIssues",
+        "title": "GitBucket: Refresh Issues",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "gitbucket-repos.refreshPullRequests",
+        "title": "GitBucket: Refresh Pull Requests",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "gitbucket-repos.refresh",
+        "title": "GitBucket: Refresh",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "gitbucket-repos.clearCredentials",
+        "title": "GitBucket: Clear Stored Credentials",
+        "icon": "$(sign-out)"
+      },
+      {
+        "command": "gitbucket-repos.openRepository",
+        "title": "GitBucket: Open Repository in Browser",
+        "icon": "$(link-external)"
+      },
+      {
+        "command": "gitbucket-repos.copyCloneUrl",
+        "title": "GitBucket: Copy Clone URL",
+        "icon": "$(copy)"
+      },
+      {
+        "command": "gitbucket-repos.cloneRepository",
+        "title": "GitBucket: Clone Repository",
+        "icon": "$(cloud-download)"
+      },
+      {
+        "command": "gitbucket-repos.openBranch",
+        "title": "GitBucket: Open Branch in Browser",
+        "icon": "$(link-external)"
+      },
+      {
+        "command": "gitbucket-repos.openIssue",
+        "title": "GitBucket: Open Issue in Browser",
+        "icon": "$(link-external)"
+      },
+      {
+        "command": "gitbucket-repos.openPullRequest",
+        "title": "GitBucket: Open Pull Request in Browser",
+        "icon": "$(link-external)"
+      },
+      {
+        "command": "gitbucket-repos.selectRepository",
+        "title": "GitBucket: Select Repository",
+        "icon": "$(repo)"
+      },
+      {
+        "command": "gitbucket-repos.filterItems",
+        "title": "GitBucket: Filter Issues and Pull Requests",
+        "icon": "$(filter)"
+      },
+      {
+        "command": "gitbucket-repos.addRepository",
+        "title": "GitBucket: Add Repository by Name",
+        "icon": "$(add)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "gitbucket-repos.connect",
+          "when": "view == gitbucketRepos.repositories",
+          "group": "navigation@1"
+        },
+        {
+          "command": "gitbucket-repos.createRepository",
+          "when": "view == gitbucketRepos.repositories && gitbucketRepos.connected",
+          "group": "navigation@2"
+        },
+        {
+          "command": "gitbucket-repos.refresh",
+          "when": "view == gitbucketRepos.repositories && gitbucketRepos.connected",
+          "group": "navigation@3"
+        },
+        {
+          "command": "gitbucket-repos.clearCredentials",
+          "when": "view == gitbucketRepos.repositories && gitbucketRepos.connected",
+          "group": "connection@2"
+        },
+        {
+          "command": "gitbucket-repos.refreshIssues",
+          "when": "view == gitbucketRepos.issues && gitbucketRepos.connected",
+          "group": "navigation@1"
+        },
+        {
+          "command": "gitbucket-repos.showIssuesForRepository",
+          "when": "view == gitbucketRepos.issues && gitbucketRepos.connected",
+          "group": "navigation@2"
+        },
+        {
+          "command": "gitbucket-repos.refreshPullRequests",
+          "when": "view == gitbucketRepos.pullRequests && gitbucketRepos.connected",
+          "group": "navigation@1"
+        },
+        {
+          "command": "gitbucket-repos.showPullRequestsForRepository",
+          "when": "view == gitbucketRepos.pullRequests && gitbucketRepos.connected",
+          "group": "navigation@2"
+        },
+        {
+          "command": "gitbucket-repos.addRepository",
+          "when": "view == gitbucketRepos.repositories && gitbucketRepos.connected",
+          "group": "navigation@4"
+        },
+        {
+          "command": "gitbucket-repos.filterItems",
+          "when": "(view == gitbucketRepos.issues || view == gitbucketRepos.pullRequests) && gitbucketRepos.connected",
+          "group": "navigation@1"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "gitbucket-repos.createBranch",
+          "when": "view == gitbucketRepos.repositories && viewItem == repository",
+          "group": "repository@2"
+        },
+        {
+          "command": "gitbucket-repos.openRepository",
+          "when": "view == gitbucketRepos.repositories && viewItem == repository",
+          "group": "inline@2"
+        },
+        {
+          "command": "gitbucket-repos.copyCloneUrl",
+          "when": "view == gitbucketRepos.repositories && viewItem == repository",
+          "group": "repository@2"
+        },
+        {
+          "command": "gitbucket-repos.cloneRepository",
+          "when": "view == gitbucketRepos.repositories && viewItem == repository",
+          "group": "navigation@1"
+        },
+        {
+          "command": "gitbucket-repos.createBranch",
+          "when": "view == gitbucketRepos.repositories && viewItem == branch",
+          "group": "repository@2"
+        },
+        {
+          "command": "gitbucket-repos.openBranch",
+          "when": "view == gitbucketRepos.repositories && viewItem == branch",
+          "group": "inline@1"
+        },
+        {
+          "command": "gitbucket-repos.openIssue",
+          "when": "view == gitbucketRepos.issues && viewItem == issue",
+          "group": "inline@1"
+        },
+        {
+          "command": "gitbucket-repos.openPullRequest",
+          "when": "view == gitbucketRepos.pullRequests && viewItem == pullRequest",
+          "group": "inline@1"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "GitBucket Repos",
+      "properties": {
+        "gitbucketRepos.baseUrl": {
+          "type": "string",
+          "default": "",
+          "description": "Default GitBucket server URL used by the extension."
+        },
+        "gitbucketRepos.preferredAuthMode": {
+          "type": "string",
+          "enum": [
+            "basic",
+            "token"
+          ],
+          "default": "token",
+          "description": "Preferred GitBucket authentication mode shown by the extension."
+        }
+      }
+    },
+    "viewsWelcome": [
+      {
+        "view": "gitbucketRepos.repositories",
+        "contents": "Browse repositories from your GitBucket server.\n[Connect to GitBucket](command:gitbucket-repos.connect)",
+        "when": "!gitbucketRepos.connected"
+      },
+      {
+        "view": "gitbucketRepos.issues",
+        "contents": "Select a repository to browse its issues.\n[Select Repository](command:gitbucket-repos.selectRepository)",
+        "when": "gitbucketRepos.connected && !gitbucketRepos.repositorySelected"
+      },
+      {
+        "view": "gitbucketRepos.pullRequests",
+        "contents": "Select a repository to browse its pull requests.\n[Select Repository](command:gitbucket-repos.selectRepository)",
+        "when": "gitbucketRepos.connected && !gitbucketRepos.repositorySelected"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p .",
+    "watch": "tsc -p . --watch",
+    "check": "tsc -p . --noEmit",
+    "test": "npm run compile && node --test test/*.test.cjs",
+    "vscode:prepublish": "npm run compile",
+    "package:vsix": "vsce package"
+  },
+  "overrides": {
+    "diff": "^8.0.4",
+    "serialize-javascript": "^7.0.6"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@types/vscode": "~1.95.0",
+    "@vscode/vsce": "^4.0.0",
+    "typescript": "^7.0.2"
+  }
+}
